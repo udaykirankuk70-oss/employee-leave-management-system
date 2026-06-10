@@ -4,12 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 
 @Entity
 @Table(name = "employees")
 public class Employee {
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    private List<LeaveRequest> leaveRequests;
+
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

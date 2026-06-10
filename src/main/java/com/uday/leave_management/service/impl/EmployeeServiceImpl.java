@@ -5,10 +5,13 @@ import com.uday.leave_management.dto.EmployeeResponseDto;
 import com.uday.leave_management.entity.Employee;
 import com.uday.leave_management.exception.EmailAlreadyExistsException;
 import com.uday.leave_management.exception.EmployeeCodeAlreadyExistsException;
+import com.uday.leave_management.exception.EmployeeNotFoundException;
 import com.uday.leave_management.mapper.EmployeeMapper;
 import com.uday.leave_management.repository.EmployeeRepository;
 import com.uday.leave_management.service.EmployeeService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -40,5 +43,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         return employeeMapper.toResponse(savedEmployee);
+    }
+    @Override
+    public EmployeeResponseDto getEmployeeById(Long id) {
+
+        Employee employee = employeeRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new EmployeeNotFoundException(
+                                "Employee not found with id: " + id
+                        ));
+
+        return employeeMapper.toResponse(employee);
+    }
+    public List<EmployeeResponseDto> getAllEmployees(){
+        List<Employee> employees= employeeRepository.findAll();
+        return employees.stream().map(employeeMapper::toResponse).toList();
     }
 }
