@@ -3,7 +3,9 @@ package com.uday.leave_management.mapper;
 import com.uday.leave_management.dto.LeaveRequestDto;
 import com.uday.leave_management.dto.LeaveResponseDto;
 import com.uday.leave_management.entity.LeaveRequest;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LeaveMapper {
     public LeaveRequest toEntity(LeaveRequestDto dto){
         LeaveRequest leaveRequest =new LeaveRequest();
@@ -18,6 +20,7 @@ public class LeaveMapper {
         dto.setStartDate(leaveRequest.getStartDate());
         dto.setEndDate(leaveRequest.getEndDate());
         dto.setReason(leaveRequest.getReason());
+        dto.setTotalDays(leaveRequest.getTotalDays());
         dto.setStatus(leaveRequest.getStatus());
         return dto;
     }
