@@ -24,5 +24,9 @@ public class LeaveRequestController {
         System.out.println(leaveRequestDto.getReason());
         return leaveRequestService.applyLeave(employeeId, leaveRequestDto);
     }
+    @PutMapping("/leave/{leaveRequestId}/approve")
+    public LeaveResponseDto approveLeave(@PathVariable Long leaveRequestId){
+        return leaveRequestService.approveLeave(leaveRequestId);
+    }
 
 }
