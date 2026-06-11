@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LeaveRequestService {
     LeaveResponseDto applyLeave(Long employeeId, LeaveRequestDto requestDto);
-    LeaveResponseDto approveLeave(Long leaveRequestId){
+    LeaveResponseDto approveLeave(Long leaveRequestId);
 
-    }
+
 }
